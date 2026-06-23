@@ -50,25 +50,32 @@ const stats = [
 ];
 
 const benefits = [
-  ["Дилерская дисциплина", "Диагностика, согласование, ремонт и выдача без хаоса."],
-  ["Оборудование в кадре", "Подъёмники, 3D сход-развал и рабочая зона видны сразу."],
-  ["Сильная репутация", "5.0 рейтинг, 427 оценок и статус Хорошее место 2026."],
-  ["Автомобили высокого класса", "Спокойный сервис для машин, где цена ошибки слишком высока."]
+  { title: "Диагностика до ремонта", text: "Сначала находим причину, затем объясняем варианты и стоимость.", accent: "01", note: "без работ вслепую" },
+  { title: "Согласование заранее", text: "Не начинаем ремонт, пока клиент не понимает объём и цену.", accent: "02", note: "прозрачная смета" },
+  { title: "Свои посты и оборудование", text: "Подъёмники, шиномонтаж, 3D сход-развал и зона ремонта на месте.", accent: "03", note: "всё в одном сервисе" },
+  { title: "Гарантия на работы", text: "После ремонта автомобиль проверяют перед выдачей клиенту.", accent: "04", note: "контроль результата" }
 ];
 
 const services = [
-  { title: "Ремонт двигателя", text: "Точная диагностика причин, ремонт узлов, контроль после сборки.", price: "", image: imagePath("stinger-engine-wash.png"), icon: Engine },
-  { title: "Ходовая часть", text: "Подвеска, рулевое, тормоза, стойки, рычаги и проверка геометрии.", price: "", image: imagePath("stinger-lifts.png"), icon: SteeringWheel },
-  { title: "Сход-развал 3D", text: "Настройка геометрии колес на современном стенде.", price: "от 2 000 ₽", image: imagePath("stinger-alignment.png"), icon: Gauge },
-  { title: "Шиномонтаж", text: "Сезонная переобувка, балансировка, осмотр колес и дисков.", price: "", image: imagePath("stinger-lifts.png"), icon: Tire },
-  { title: "ТО автомобиля", text: "Масло, фильтры, жидкости, регламент и профилактический осмотр.", price: "", image: imagePath("stinger-lifts.png"), icon: Wrench },
-  { title: "Компьютерная диагностика", text: "Ошибки, датчики, электронные системы и понятный отчёт.", price: "", image: imagePath("stinger-alignment.png"), icon: GearSix },
-  { title: "Выхлоп и катализатор", text: "Герметичность, шум, катализатор и восстановление системы.", price: "", image: imagePath("stinger-engine-wash.png"), icon: ShieldCheck },
-  { title: "Автоподбор", text: "Проверка автомобиля перед покупкой и оценка скрытых рисков.", price: "от 2 500 ₽", image: imagePath("stinger-facade-wide.png"), icon: CarProfile },
-  { title: "Детейлинг", text: "Полировка, химчистка, керамика и подготовка внешнего вида.", price: "", image: imagePath("stinger-sign-sky.png"), icon: Sparkle }
+  { title: "Ремонт двигателя", text: "Диагностика неисправности, ремонт навесного оборудования, устранение течей, замена узлов.", price: "от 8 000 ₽", icon: Engine },
+  { title: "Ходовая часть", text: "Проверка подвески, рулевого управления и тормозной системы с подбором нужных работ.", price: "от 1 500 ₽", icon: SteeringWheel },
+  { title: "Сход-развал 3D", text: "Настройка углов установки колёс после ремонта подвески, замены шин или удара.", price: "от 2 500 ₽", icon: Gauge },
+  { title: "Шиномонтаж", text: "Сезонная переобувка, балансировка, проверка дисков, вентилей и состояния резины.", price: "от 2 400 ₽", icon: Tire },
+  { title: "ТО автомобиля", text: "Замена масла, фильтров, жидкостей и базовый осмотр перед дальнейшей эксплуатацией.", price: "от 4 500 ₽", icon: Wrench },
+  { title: "Компьютерная диагностика", text: "Считывание ошибок, проверка датчиков и понятное объяснение, что требует внимания.", price: "от 1 500 ₽", icon: GearSix },
+  { title: "Выхлоп и катализатор", text: "Поиск посторонних звуков, проверка герметичности и ремонт элементов системы.", price: "от 3 000 ₽", icon: ShieldCheck },
+  { title: "Автоподбор", text: "Осмотр автомобиля перед покупкой: кузов, техника, электронные блоки и явные риски.", price: "от 5 000 ₽", icon: CarProfile },
+  { title: "Детейлинг", text: "Полировка, химчистка, защитные составы и подготовка автомобиля к продаже или сезону.", price: "от 6 000 ₽", icon: Sparkle }
 ];
 
-const processSteps = ["Приём", "Диагностика", "Смета", "Ремонт", "Контроль", "Выдача"];
+const processSteps = [
+  { title: "Приём", text: "Фиксируем жалобы, осматриваем автомобиль и уточняем задачу.", tag: "10 мин" },
+  { title: "Диагностика", text: "Проверяем причину, а не меняем детали наугад.", tag: "по факту" },
+  { title: "Смета", text: "Показываем, что нужно сделать сейчас, а что можно отложить.", tag: "до работ" },
+  { title: "Ремонт", text: "Выполняем согласованные работы и держим клиента в курсе.", tag: "в срок" },
+  { title: "Контроль", text: "Проверяем результат до выдачи и убираем следы работ.", tag: "проверка" },
+  { title: "Выдача", text: "Объясняем, что сделано, и даём рекомендации по эксплуатации.", tag: "понятно" }
+];
 
 const gallery = [
   { src: imagePath("stinger-hero-facade.png"), alt: "Фасад СТО Stinger" },
@@ -212,19 +219,21 @@ export default function Home() {
       </header>
 
       <section className="hero-section relative min-h-[100dvh] overflow-hidden">
-        <Image src={imagePath("stinger-hero-facade.png")} alt="Фасад СТО Stinger в Кудрово" fill priority sizes="100vw" className="hero-bg object-cover object-[72%_center]" />
+        <div className="hero-media">
+          <Image src={imagePath("stinger-hero-facade.png")} alt="Фасад СТО Stinger в Кудрово" fill priority sizes="100vw" className="hero-bg object-contain object-right-top" />
+        </div>
         <div className="hero-shade" />
         <div className="hero-red-glow" />
-        <div className="relative z-10 mx-auto flex min-h-[100dvh] max-w-7xl flex-col justify-end px-4 pb-8 pt-28 sm:px-6 lg:px-8">
+        <div className="relative z-10 mx-auto flex min-h-[100dvh] max-w-[94rem] flex-col justify-end px-4 pb-8 pt-28 sm:px-6 lg:px-10">
           <motion.div className="max-w-3xl pb-8 lg:mr-auto">
             <div className="premium-pill mb-5 inline-flex items-center gap-2 rounded-full px-4 py-2 text-xs font-black uppercase tracking-[0.18em] text-white">
               <SealCheck size={16} weight="fill" /> Хорошее место 2026
             </div>
             <h1 className="hero-title max-w-5xl text-6xl font-black leading-[0.88] tracking-[-0.055em] text-white sm:text-7xl lg:text-8xl">
-              Ремонт и обслуживание автомобилей в Кудрово
+              Автосервис Stinger в Кудрово
             </h1>
             <p className="mt-6 max-w-2xl text-lg font-medium leading-7 text-white/78 md:text-xl">
-              СТО Stinger помогает быстро понять причину неисправности, согласовать ремонт и вернуть автомобиль в работу без лишнего ожидания. Диагностика, ТО, ходовая, шиномонтаж и 3D сход-развал каждый день с 10:00 до 21:00.
+              Диагностика, ТО, ходовая, шиномонтаж и 3D сход-развал без лишних обещаний. Разберёмся с причиной, согласуем стоимость и вернём автомобиль в работу.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <PrimaryButton><CalendarCheck size={18} weight="bold" />Записаться</PrimaryButton>
@@ -245,13 +254,19 @@ export default function Home() {
 
       <section id="уровень" className="px-4 py-20 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
-          <SectionTitle kicker="Уровень" title="Сервис, где понятно что делают с автомобилем" text="Проверяем, объясняем причину, заранее согласуем стоимость и выдаём машину после контрольной проверки." />
+          <SectionTitle kicker="Уровень" title="Понятный ремонт без сюрпризов в счёте" text="Клиент видит, за что платит: причина неисправности, список работ, стоимость и результат после проверки." />
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-            {benefits.map(([title, text], index) => (
-              <motion.div key={title} transition={{ delay: index * 0.04 }} className="premium-card card-hover rounded-2xl p-6">
-                <CheckCircle size={28} weight="fill" className="text-[var(--red)]" />
-                <h3 className="mt-6 text-xl font-black text-white">{title}</h3>
-                <p className="mt-3 leading-7 text-[var(--muted)]">{text}</p>
+            {benefits.map((benefit, index) => (
+              <motion.div key={benefit.title} transition={{ delay: index * 0.04 }} className="premium-card benefit-card card-hover rounded-2xl p-6">
+                <div className="flex items-start justify-between gap-4">
+                  <div className="benefit-icon grid size-12 place-items-center rounded-xl">
+                    <CheckCircle size={25} weight="fill" />
+                  </div>
+                  <span className="benefit-number">{benefit.accent}</span>
+                </div>
+                <h3 className="mt-7 text-xl font-black text-white">{benefit.title}</h3>
+                <p className="mt-3 min-h-24 leading-7 text-[var(--muted)]">{benefit.text}</p>
+                <div className="benefit-note mt-6 rounded-xl px-4 py-3 text-xs font-black uppercase tracking-[0.14em]">{benefit.note}</div>
               </motion.div>
             ))}
           </div>
@@ -260,26 +275,24 @@ export default function Home() {
 
       <section id="услуги" className="px-4 py-20 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
-          <SectionTitle kicker="Услуги" title="Работы, которые требуют точности" text="Каждая карточка выглядит как продукт высокого класса: фото, короткая суть, цена там, где она известна." />
+          <SectionTitle kicker="Услуги" title="Основные работы и ориентиры по цене" text="Точную стоимость назовём после осмотра: цена зависит от модели, состояния автомобиля и списка запчастей." />
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
             {services.map((service, index) => {
               const Icon = service.icon;
               return (
                 <motion.a key={service.title} href="#booking" transition={{ delay: index * 0.025 }} className="service-card group overflow-hidden rounded-2xl">
-                  <div className="relative h-52 overflow-hidden">
-                    <Image src={service.image} alt={service.title} fill sizes="(max-width: 768px) 100vw, 33vw" className="service-image object-cover transition duration-700 group-hover:scale-110" />
-                    <div className="service-image-shade" />
-                    <div className="absolute left-5 top-5 grid size-12 place-items-center rounded-xl border border-white/10 bg-black/45 text-[var(--red)] backdrop-blur-md">
-                      <Icon size={25} weight="bold" />
-                    </div>
+                  <div className="service-placeholder">
+                    <div className="service-orbit" />
+                    <Icon size={42} weight="bold" />
+                    <span>Изображение будет добавлено</span>
                   </div>
                   <div className="p-6">
                     <div className="flex items-start justify-between gap-4">
                       <h3 className="text-2xl font-black leading-tight text-white">{service.title}</h3>
                       <ArrowRight size={20} className="mt-1 shrink-0 text-white/40 transition group-hover:translate-x-1 group-hover:text-[var(--red)]" />
                     </div>
-                    <p className="mt-4 min-h-12 text-sm leading-6 text-[var(--muted)]">{service.text}</p>
-                    {service.price ? <p className="mt-5 text-xl font-black text-[var(--red)]">{service.price}</p> : null}
+                    <p className="mt-4 min-h-24 text-sm leading-6 text-[var(--muted)]">{service.text}</p>
+                    <p className="mt-5 text-xl font-black text-[var(--red)]">{service.price}</p>
                   </div>
                 </motion.a>
               );
@@ -290,12 +303,16 @@ export default function Home() {
 
       <section id="процесс" className="px-4 py-20 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
-          <SectionTitle kicker="Процесс" title="Контроль на каждом этапе" text="Короткая цепочка без лишних разговоров: принять, проверить, согласовать, сделать, выдать." />
-          <div className="process-grid grid gap-3 lg:grid-cols-6">
+          <SectionTitle kicker="Процесс" title="От заявки до выдачи без лишних звонков" text="Всё строится вокруг понятного решения: что случилось, сколько стоит ремонт и когда автомобиль будет готов." />
+          <div className="process-grid grid gap-4 md:grid-cols-2 lg:grid-cols-3">
             {processSteps.map((step, index) => (
-              <motion.div key={step} transition={{ delay: index * 0.05 }} className="process-card rounded-2xl p-5">
-                <div className="text-sm font-black text-[var(--red)]">{String(index + 1).padStart(2, "0")}</div>
-                <h3 className="mt-10 text-xl font-black text-white">{step}</h3>
+              <motion.div key={step.title} transition={{ delay: index * 0.05 }} className="process-card rounded-2xl p-6">
+                <div className="flex items-center justify-between gap-4">
+                  <div className="process-index">{String(index + 1).padStart(2, "0")}</div>
+                  <div className="process-tag">{step.tag}</div>
+                </div>
+                <h3 className="mt-8 text-2xl font-black text-white">{step.title}</h3>
+                <p className="mt-3 leading-7 text-[var(--muted)]">{step.text}</p>
               </motion.div>
             ))}
           </div>
@@ -304,7 +321,7 @@ export default function Home() {
 
       <section id="фото" className="px-4 py-20 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
-          <SectionTitle kicker="Фото" title="Реальные фото СТО Stinger" text="Фасад, ремонтная зона, оборудование и рабочие процессы сервиса." />
+          <SectionTitle kicker="Сервис" title="Реальные кадры Stinger" text="Фасад, ремонтная зона, оборудование и рабочие процессы сервиса." />
           <div className="grid auto-rows-[230px] gap-4 md:grid-cols-4">
             {gallery.map((image, index) => (
               <motion.div key={image.src} className={`gallery-tile relative overflow-hidden rounded-2xl ${index === 0 || index === 4 ? "md:col-span-2 md:row-span-2" : ""}`}>
@@ -324,9 +341,9 @@ export default function Home() {
             <p className="mt-4 max-w-md text-lg leading-7 text-[var(--muted)]">427 оценок, 267 отзывов, Хорошее место 2026. Репутация, которую видно до первого звонка.</p>
           </motion.div>
           <motion.div className="promo-panel rounded-2xl p-8">
-            <p className="text-sm font-black uppercase tracking-[0.18em] text-[var(--red)]">По старым ценам</p>
-            <h2 className="mt-4 text-4xl font-black leading-tight text-white md:text-6xl">Шиномонтаж и сервисные работы без лишнего ожидания</h2>
-            <p className="mt-5 max-w-2xl text-lg leading-8 text-[var(--muted)]">Уточните актуальные предложения и ближайшее окно записи у администратора СТО Stinger.</p>
+            <p className="text-sm font-black uppercase tracking-[0.18em] text-[var(--red)]">Быстрая запись</p>
+            <h2 className="mt-4 text-4xl font-black leading-tight text-white md:text-6xl">Запишитесь на удобное время без очереди</h2>
+            <p className="mt-5 max-w-2xl text-lg leading-8 text-[var(--muted)]">Позвоните или оставьте заявку. Администратор подберёт ближайшее окно и заранее сориентирует по стоимости работ.</p>
             <div className="mt-8"><PrimaryButton href="#booking">Записаться<ArrowRight size={18} weight="bold" /></PrimaryButton></div>
           </motion.div>
         </div>
