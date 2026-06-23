@@ -4,6 +4,9 @@ const nextConfig: NextConfig = {
   output: "export",
   trailingSlash: true,
   basePath: process.env.GITHUB_PAGES === "1" ? "/Stinger" : "",
+  env: {
+    NEXT_PUBLIC_BASE_PATH: process.env.GITHUB_PAGES === "1" ? "/Stinger" : ""
+  },
   images: {
     unoptimized: true,
     remotePatterns: []

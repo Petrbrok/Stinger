@@ -33,8 +33,13 @@ import {
 
 const nav = ["Уровень", "Услуги", "Процесс", "Фото", "Контакты"];
 const phone = { value: "+7 (981) 790-00-09", href: "tel:+79817900009" };
-const address = "Пражская ул., 17Е, Кудрово";
-const mapHref = "https://yandex.ru/maps/?text=%D0%9F%D1%80%D0%B0%D0%B6%D1%81%D0%BA%D0%B0%D1%8F%20%D1%83%D0%BB.%2C%2017%D0%95%2C%20%D0%9A%D1%83%D0%B4%D1%80%D0%BE%D0%B2%D0%BE";
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+const imagePath = (name: string) => `${basePath}/images/${name}`;
+const address = "СТО Stinger, Пражская ул., 17Е, Кудрово";
+const mapQuery = encodeURIComponent("СТО Stinger, Пражская улица, 17Е, Кудрово");
+const mapHref = `https://yandex.ru/maps/?text=${mapQuery}`;
+const mapEmbed = `https://yandex.ru/map-widget/v1/?text=${mapQuery}&z=16`;
+const carBrands = ["Kia", "Hyundai", "Toyota", "Volkswagen", "Skoda", "BMW", "Mercedes-Benz", "Audi", "Lexus", "Nissan", "Renault", "Ford", "Другая марка"];
 
 const stats = [
   ["5.0", "рейтинг"],
@@ -52,25 +57,25 @@ const benefits = [
 ];
 
 const services = [
-  { title: "Ремонт двигателя", text: "Точная диагностика причин, ремонт узлов, контроль после сборки.", price: "", image: "/images/stinger-engine-wash.png", icon: Engine },
-  { title: "Ходовая часть", text: "Подвеска, рулевое, тормоза, стойки, рычаги и проверка геометрии.", price: "", image: "/images/stinger-lifts.png", icon: SteeringWheel },
-  { title: "Сход-развал 3D", text: "Настройка геометрии колес на современном стенде.", price: "от 2 000 ₽", image: "/images/stinger-alignment.png", icon: Gauge },
-  { title: "Шиномонтаж", text: "Сезонная переобувка, балансировка, осмотр колес и дисков.", price: "", image: "/images/stinger-lifts.png", icon: Tire },
-  { title: "ТО автомобиля", text: "Масло, фильтры, жидкости, регламент и профилактический осмотр.", price: "", image: "/images/stinger-lifts.png", icon: Wrench },
-  { title: "Компьютерная диагностика", text: "Ошибки, датчики, электронные системы и понятный отчёт.", price: "", image: "/images/stinger-alignment.png", icon: GearSix },
-  { title: "Выхлоп и катализатор", text: "Герметичность, шум, катализатор и восстановление системы.", price: "", image: "/images/stinger-engine-wash.png", icon: ShieldCheck },
-  { title: "Автоподбор", text: "Проверка автомобиля перед покупкой и оценка скрытых рисков.", price: "от 2 500 ₽", image: "/images/stinger-facade-wide.png", icon: CarProfile },
-  { title: "Детейлинг", text: "Полировка, химчистка, керамика и подготовка внешнего вида.", price: "", image: "/images/stinger-sign-sky.png", icon: Sparkle }
+  { title: "Ремонт двигателя", text: "Точная диагностика причин, ремонт узлов, контроль после сборки.", price: "", image: imagePath("stinger-engine-wash.png"), icon: Engine },
+  { title: "Ходовая часть", text: "Подвеска, рулевое, тормоза, стойки, рычаги и проверка геометрии.", price: "", image: imagePath("stinger-lifts.png"), icon: SteeringWheel },
+  { title: "Сход-развал 3D", text: "Настройка геометрии колес на современном стенде.", price: "от 2 000 ₽", image: imagePath("stinger-alignment.png"), icon: Gauge },
+  { title: "Шиномонтаж", text: "Сезонная переобувка, балансировка, осмотр колес и дисков.", price: "", image: imagePath("stinger-lifts.png"), icon: Tire },
+  { title: "ТО автомобиля", text: "Масло, фильтры, жидкости, регламент и профилактический осмотр.", price: "", image: imagePath("stinger-lifts.png"), icon: Wrench },
+  { title: "Компьютерная диагностика", text: "Ошибки, датчики, электронные системы и понятный отчёт.", price: "", image: imagePath("stinger-alignment.png"), icon: GearSix },
+  { title: "Выхлоп и катализатор", text: "Герметичность, шум, катализатор и восстановление системы.", price: "", image: imagePath("stinger-engine-wash.png"), icon: ShieldCheck },
+  { title: "Автоподбор", text: "Проверка автомобиля перед покупкой и оценка скрытых рисков.", price: "от 2 500 ₽", image: imagePath("stinger-facade-wide.png"), icon: CarProfile },
+  { title: "Детейлинг", text: "Полировка, химчистка, керамика и подготовка внешнего вида.", price: "", image: imagePath("stinger-sign-sky.png"), icon: Sparkle }
 ];
 
-const process = ["Приём", "Диагностика", "Смета", "Ремонт", "Контроль", "Выдача"];
+const processSteps = ["Приём", "Диагностика", "Смета", "Ремонт", "Контроль", "Выдача"];
 
 const gallery = [
-  { src: "/images/stinger-lifts.png", alt: "Ремонтная зона Stinger с подъёмником" },
-  { src: "/images/stinger-alignment.png", alt: "3D сход-развал Stinger" },
-  { src: "/images/stinger-engine-wash.png", alt: "Работа с моторным отсеком" },
-  { src: "/images/stinger-sign-sky.png", alt: "Вывеска Stinger" },
-  { src: "/images/stinger-facade-wide.png", alt: "Фасад СТО Stinger" }
+  { src: imagePath("stinger-hero-facade.png"), alt: "Фасад СТО Stinger" },
+  { src: imagePath("stinger-lifts.png"), alt: "Ремонтная зона Stinger с подъёмником" },
+  { src: imagePath("stinger-alignment.png"), alt: "3D сход-развал Stinger" },
+  { src: imagePath("stinger-engine-wash.png"), alt: "Работа с моторным отсеком" },
+  { src: imagePath("stinger-sign-sky.png"), alt: "Вывеска Stinger" }
 ];
 
 type MotionExtra = { transition?: { delay?: number } };
@@ -207,19 +212,19 @@ export default function Home() {
       </header>
 
       <section className="hero-section relative min-h-[100dvh] overflow-hidden">
-        <Image src="/images/stinger-lifts.png" alt="Премиальная ремонтная зона Stinger" fill priority sizes="100vw" className="hero-bg object-cover" />
+        <Image src={imagePath("stinger-hero-facade.png")} alt="Фасад СТО Stinger в Кудрово" fill priority sizes="100vw" className="hero-bg object-cover object-[72%_center]" />
         <div className="hero-shade" />
         <div className="hero-red-glow" />
         <div className="relative z-10 mx-auto flex min-h-[100dvh] max-w-7xl flex-col justify-end px-4 pb-8 pt-28 sm:px-6 lg:px-8">
-          <motion.div className="max-w-5xl pb-8">
+          <motion.div className="max-w-3xl pb-8 lg:mr-auto">
             <div className="premium-pill mb-5 inline-flex items-center gap-2 rounded-full px-4 py-2 text-xs font-black uppercase tracking-[0.18em] text-white">
               <SealCheck size={16} weight="fill" /> Хорошее место 2026
             </div>
             <h1 className="hero-title max-w-5xl text-6xl font-black leading-[0.88] tracking-[-0.055em] text-white sm:text-7xl lg:text-8xl">
-              Сервисный центр для дорогих автомобилей
+              Ремонт и обслуживание автомобилей в Кудрово
             </h1>
             <p className="mt-6 max-w-2xl text-lg font-medium leading-7 text-white/78 md:text-xl">
-              Ремонт, диагностика, 3D сход-развал и обслуживание в Кудрово. Без гаражного хаоса. С гарантией на работы.
+              СТО Stinger помогает быстро понять причину неисправности, согласовать ремонт и вернуть автомобиль в работу без лишнего ожидания. Диагностика, ТО, ходовая, шиномонтаж и 3D сход-развал каждый день с 10:00 до 21:00.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <PrimaryButton><CalendarCheck size={18} weight="bold" />Записаться</PrimaryButton>
@@ -240,7 +245,7 @@ export default function Home() {
 
       <section id="уровень" className="px-4 py-20 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
-          <SectionTitle kicker="Уровень" title="Не обычное СТО. Специализированный сервисный центр." text="Stinger должен ощущаться как место, куда спокойно отдают автомобиль стоимостью несколько миллионов рублей." />
+          <SectionTitle kicker="Уровень" title="Сервис, где понятно что делают с автомобилем" text="Проверяем, объясняем причину, заранее согласуем стоимость и выдаём машину после контрольной проверки." />
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
             {benefits.map(([title, text], index) => (
               <motion.div key={title} transition={{ delay: index * 0.04 }} className="premium-card card-hover rounded-2xl p-6">
@@ -287,7 +292,7 @@ export default function Home() {
         <div className="mx-auto max-w-7xl">
           <SectionTitle kicker="Процесс" title="Контроль на каждом этапе" text="Короткая цепочка без лишних разговоров: принять, проверить, согласовать, сделать, выдать." />
           <div className="process-grid grid gap-3 lg:grid-cols-6">
-            {process.map((step, index) => (
+            {processSteps.map((step, index) => (
               <motion.div key={step} transition={{ delay: index * 0.05 }} className="process-card rounded-2xl p-5">
                 <div className="text-sm font-black text-[var(--red)]">{String(index + 1).padStart(2, "0")}</div>
                 <h3 className="mt-10 text-xl font-black text-white">{step}</h3>
@@ -299,7 +304,7 @@ export default function Home() {
 
       <section id="фото" className="px-4 py-20 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
-          <SectionTitle kicker="Фото" title="Единая тёмная обработка реальных кадров" text="Высокий контраст, глубокие тени и красный акцент превращают реальные фото в фирменную визуальную систему." />
+          <SectionTitle kicker="Фото" title="Реальные фото СТО Stinger" text="Фасад, ремонтная зона, оборудование и рабочие процессы сервиса." />
           <div className="grid auto-rows-[230px] gap-4 md:grid-cols-4">
             {gallery.map((image, index) => (
               <motion.div key={image.src} className={`gallery-tile relative overflow-hidden rounded-2xl ${index === 0 || index === 4 ? "md:col-span-2 md:row-span-2" : ""}`}>
@@ -341,12 +346,19 @@ export default function Home() {
 
           <MotionForm onSubmit={(event) => event.preventDefault()} className="form-panel rounded-2xl p-5 md:p-8">
             <div className="grid gap-4 md:grid-cols-2">
-              {["Имя", "Телефон", "Марка автомобиля"].map((label) => (
+              {["Имя", "Телефон"].map((label) => (
                 <label key={label} className="grid gap-2 text-sm font-bold text-white/72">
                   {label}
                   <input className="premium-input min-h-13 rounded-xl px-4 text-white outline-none transition placeholder:text-white/28" placeholder={label} type={label === "Телефон" ? "tel" : "text"} />
                 </label>
               ))}
+              <label className="grid gap-2 text-sm font-bold text-white/72 md:col-span-2">
+                Марка автомобиля
+                <select className="premium-input min-h-13 w-full rounded-xl px-4 text-white outline-none transition">
+                  <option value="">Выберите марку</option>
+                  {carBrands.map((brand) => <option key={brand} value={brand}>{brand}</option>)}
+                </select>
+              </label>
               <label className="grid gap-2 text-sm font-bold text-white/72 md:col-span-2">
                 Что требуется сделать
                 <textarea className="premium-input min-h-32 resize-none rounded-xl px-4 py-4 text-white outline-none transition placeholder:text-white/28" placeholder="Кратко опишите задачу" />
@@ -375,9 +387,7 @@ export default function Home() {
           </motion.div>
 
           <motion.div className="map-grid relative min-h-[420px] overflow-hidden rounded-2xl border border-white/10">
-            <div className="premium-pin absolute left-1/2 top-1/2 grid size-16 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full text-white">
-              <MapPin size={30} weight="fill" />
-            </div>
+            <iframe src={mapEmbed} title="СТО Stinger на Яндекс.Картах" className="absolute inset-0 size-full border-0" loading="lazy" />
             <div className="absolute bottom-5 left-5 right-5 rounded-2xl border border-white/10 bg-black/72 p-5 shadow-xl backdrop-blur-xl">
               <p className="text-sm text-white/46">СТО Stinger на карте</p>
               <p className="mt-1 text-lg font-black text-white">{address}</p>
