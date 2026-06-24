@@ -219,13 +219,11 @@ export default function Home() {
       </header>
 
       <section className="hero-section relative min-h-[100dvh] overflow-hidden">
-        <div className="hero-media">
-          <Image src={imagePath("stinger-hero-facade.png")} alt="Фасад СТО Stinger в Кудрово" fill priority sizes="100vw" className="hero-bg object-contain object-right-top" />
-        </div>
+        <div className="hero-pattern" />
         <div className="hero-shade" />
         <div className="hero-red-glow" />
-        <div className="relative z-10 mx-auto flex min-h-[100dvh] max-w-[94rem] flex-col justify-end px-4 pb-8 pt-28 sm:px-6 lg:px-10">
-          <motion.div className="max-w-3xl pb-8 lg:mr-auto">
+        <div className="relative z-10 mx-auto grid min-h-[100dvh] max-w-[94rem] content-end gap-8 px-4 pb-8 pt-28 sm:px-6 lg:grid-cols-[0.88fr_1.12fr] lg:px-10">
+          <motion.div className="max-w-3xl pb-0 lg:self-end lg:pb-20">
             <div className="premium-pill mb-5 inline-flex items-center gap-2 rounded-full px-4 py-2 text-xs font-black uppercase tracking-[0.18em] text-white">
               <SealCheck size={16} weight="fill" /> Хорошее место 2026
             </div>
@@ -241,7 +239,23 @@ export default function Home() {
             </div>
           </motion.div>
 
-          <motion.div className="hero-stat-panel grid gap-0 overflow-hidden rounded-2xl lg:grid-cols-5">
+          <motion.div className="hero-photo-card mb-2 lg:mb-20 lg:self-end">
+            <div className="hero-photo-toolbar">
+              <span />
+              <span />
+              <span />
+              <strong>service bay</strong>
+            </div>
+            <div className="hero-photo-frame">
+              <Image src={imagePath("stinger-hero-service-bay.png")} alt="Ремонтная зона СТО Stinger" fill priority sizes="(max-width: 1024px) 100vw, 58vw" className="hero-photo object-cover" />
+            </div>
+            <div className="hero-photo-caption">
+              <span>Подъёмники и рабочая зона</span>
+              <strong>Кудрово</strong>
+            </div>
+          </motion.div>
+
+          <motion.div className="hero-stat-panel grid gap-0 overflow-hidden rounded-2xl lg:col-span-2 lg:grid-cols-5">
             {stats.map(([value, label]) => (
               <div key={`${value}-${label}`} className="stat-cell px-5 py-5">
                 <div className="text-xl font-black text-white">{value}</div>
