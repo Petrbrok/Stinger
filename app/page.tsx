@@ -41,6 +41,12 @@ const mapHref = `https://yandex.ru/maps/?text=${mapQuery}`;
 const mapEmbed = `https://yandex.ru/map-widget/v1/?text=${mapQuery}&z=16`;
 const carBrands = ["Kia", "Hyundai", "Toyota", "Volkswagen", "Skoda", "BMW", "Mercedes-Benz", "Audi", "Lexus", "Nissan", "Renault", "Ford", "Другая марка"];
 
+const heroSlides = [
+  { src: imagePath("stinger-hero-service-bay.png"), alt: "Ремонтная зона СТО Stinger", caption: "Подъёмники и рабочая зона" },
+  { src: imagePath("stinger-hero-sign-sky.png"), alt: "Вывеска СТО Stinger", caption: "Фасад и вывеска Stinger" },
+  { src: imagePath("stinger-hero-detailing.png"), alt: "Работа мастера Stinger", caption: "Аккуратная работа с кузовом" }
+];
+
 const stats = [
   ["5.0", "рейтинг"],
   ["427", "оценок"],
@@ -158,8 +164,17 @@ function BurgerIcon({ open }: { open: boolean }) {
 
 export default function Home() {
   const [open, setOpen] = useState(false);
+  const [heroSlide, setHeroSlide] = useState(0);
+  const [showAllServices, setShowAllServices] = useState(false);
   const navRef = useRef<HTMLElement | null>(null);
   const [navPill, setNavPill] = useState({ left: 0, width: 0, opacity: 0 });
+
+  useEffect(() => {
+    const timer = window.setInterval(() => {
+      setHeroSlide((value) => (value + 1) % heroSlides.length);
+    }, 1500);
+    return () => window.clearInterval(timer);
+  }, []);
 
   function moveNavPill(node: HTMLAnchorElement) {
     const parent = navRef.current;
@@ -241,16 +256,32 @@ export default function Home() {
 
           <motion.div className="hero-photo-card mb-2 lg:mb-20 lg:self-end">
             <div className="hero-photo-toolbar">
-              <span />
-              <span />
-              <span />
+              {heroSlides.map((slide, index) => (
+                <button
+                  key={slide.src}
+                  type="button"
+                  className={index === heroSlide ? "is-active" : ""}
+                  aria-label={`Показать фото ${index + 1}`}
+                  onClick={() => setHeroSlide(index)}
+                />
+              ))}
               <strong>service bay</strong>
             </div>
             <div className="hero-photo-frame">
-              <Image src={imagePath("stinger-hero-service-bay.png")} alt="Ремонтная зона СТО Stinger" fill priority sizes="(max-width: 1024px) 100vw, 58vw" className="hero-photo object-cover" />
+              {heroSlides.map((slide, index) => (
+                <Image
+                  key={slide.src}
+                  src={slide.src}
+                  alt={slide.alt}
+                  fill
+                  priority={index === 0}
+                  sizes="(max-width: 1024px) 100vw, 58vw"
+                  className={`hero-photo object-cover ${index === heroSlide ? "is-active" : ""}`}
+                />
+              ))}
             </div>
             <div className="hero-photo-caption">
-              <span>Подъёмники и рабочая зона</span>
+              <span>{heroSlides[heroSlide].caption}</span>
               <strong>Кудрово</strong>
             </div>
           </motion.div>
@@ -290,7 +321,7 @@ export default function Home() {
       <section id="услуги" className="px-4 py-20 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <SectionTitle kicker="Услуги" title="Основные работы и ориентиры по цене" text="Точную стоимость назовём после осмотра: цена зависит от модели, состояния автомобиля и списка запчастей." />
-          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          <div className={`services-grid grid gap-4 md:grid-cols-2 lg:grid-cols-3 ${showAllServices ? "is-expanded" : ""}`}>
             {services.map((service, index) => {
               const Icon = service.icon;
               return (
@@ -312,6 +343,14 @@ export default function Home() {
               );
             })}
           </div>
+          {!showAllServices ? (
+            <div className="mt-5 md:hidden">
+              <button type="button" className="show-services-button inline-flex min-h-13 w-full items-center justify-center gap-2 rounded-xl px-6 text-sm font-black text-white" onClick={() => setShowAllServices(true)}>
+                Показать все услуги
+                <ArrowRight size={18} weight="bold" />
+              </button>
+            </div>
+          ) : null}
         </div>
       </section>
 
@@ -419,10 +458,10 @@ export default function Home() {
 
           <motion.div className="map-grid relative min-h-[420px] overflow-hidden rounded-2xl border border-white/10">
             <iframe src={mapEmbed} title="СТО Stinger на Яндекс.Картах" className="absolute inset-0 size-full border-0" loading="lazy" />
-            <div className="absolute bottom-5 left-5 right-5 rounded-2xl border border-white/10 bg-black/72 p-5 shadow-xl backdrop-blur-xl">
-              <p className="text-sm text-white/46">СТО Stinger на карте</p>
+            <a href={mapHref} className="map-route-card absolute bottom-5 left-5 right-5 rounded-2xl border border-white/10 bg-black/72 p-5 shadow-xl backdrop-blur-xl" target="_blank" rel="noreferrer">
+              <p className="text-sm text-white/46">Построить маршрут</p>
               <p className="mt-1 text-lg font-black text-white">{address}</p>
-            </div>
+            </a>
           </motion.div>
         </div>
       </section>
