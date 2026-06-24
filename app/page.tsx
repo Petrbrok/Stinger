@@ -172,7 +172,7 @@ export default function Home() {
   useEffect(() => {
     const timer = window.setInterval(() => {
       setHeroSlide((value) => (value + 1) % heroSlides.length);
-    }, 1500);
+    }, 3200);
     return () => window.clearInterval(timer);
   }, []);
 
@@ -459,8 +459,9 @@ export default function Home() {
           <motion.div className="map-grid relative min-h-[420px] overflow-hidden rounded-2xl border border-white/10">
             <iframe src={mapEmbed} title="СТО Stinger на Яндекс.Картах" className="absolute inset-0 size-full border-0" loading="lazy" />
             <a href={mapHref} className="map-route-card absolute bottom-5 left-5 right-5 rounded-2xl border border-white/10 bg-black/72 p-5 shadow-xl backdrop-blur-xl" target="_blank" rel="noreferrer">
-              <p className="text-sm text-white/46">Построить маршрут</p>
-              <p className="mt-1 text-lg font-black text-white">{address}</p>
+              <span className="map-route-icon"><ArrowRight size={19} weight="bold" /></span>
+              <p className="text-sm font-black uppercase tracking-[0.16em] text-[var(--red)]">Построить маршрут</p>
+              <p className="mt-1 pr-12 text-lg font-black text-white">{address}</p>
             </a>
           </motion.div>
         </div>
