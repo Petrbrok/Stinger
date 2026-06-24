@@ -9,6 +9,7 @@ import {
   type CSSProperties,
   type FormHTMLAttributes,
   type HTMLAttributes,
+  type MouseEvent,
   type ReactNode
 } from "react";
 import {
@@ -184,11 +185,25 @@ export default function Home() {
     setNavPill({ left: nodeRect.left - parentRect.left, width: nodeRect.width, opacity: 1 });
   }
 
+  function scrollToTarget(event: MouseEvent<HTMLAnchorElement>, href: string) {
+    if (!href.startsWith("#")) return;
+    event.preventDefault();
+    const id = href.slice(1);
+    if (!id) {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      return;
+    }
+    const target = document.getElementById(id);
+    if (!target) return;
+    target.scrollIntoView({ behavior: "smooth", block: "start" });
+    history.replaceState(null, "", href);
+  }
+
   return (
     <main className="page-shell min-h-[100dvh] overflow-hidden pb-20 text-white lg:pb-0">
       <header className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-[#08090c]/84 shadow-[0_18px_80px_rgba(0,0,0,0.42)] backdrop-blur-2xl">
         <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-          <a href="#" className="group flex items-center gap-3">
+          <a href="#" onClick={(event) => scrollToTarget(event, "#")} className="group flex items-center gap-3">
             <span className="brand-mark grid size-10 place-items-center rounded-xl text-lg font-black text-white">S</span>
             <span>
               <span className="block text-base font-black leading-none text-white">СТО Stinger</span>
@@ -199,7 +214,14 @@ export default function Home() {
           <nav ref={navRef} className="liquid-nav relative hidden items-center gap-1 rounded-full p-1 text-sm text-[var(--muted)] lg:flex" onMouseLeave={() => setNavPill((value) => ({ ...value, opacity: 0 }))}>
             <span className="liquid-nav-pill" style={{ opacity: navPill.opacity, transform: `translateX(${navPill.left}px)`, width: navPill.width }} />
             {nav.map((item) => (
-              <a key={item} href={`#${item.toLowerCase()}`} onMouseEnter={(event) => moveNavPill(event.currentTarget)} onFocus={(event) => moveNavPill(event.currentTarget)} className="relative z-10 rounded-full px-4 py-2 transition hover:text-white focus-visible:text-white focus-visible:outline-none">
+              <a
+                key={item}
+                href={`#${item.toLowerCase()}`}
+                onClick={(event) => scrollToTarget(event, `#${item.toLowerCase()}`)}
+                onMouseEnter={(event) => moveNavPill(event.currentTarget)}
+                onFocus={(event) => moveNavPill(event.currentTarget)}
+                className="relative z-10 rounded-full px-4 py-2 transition hover:text-white focus-visible:text-white focus-visible:outline-none"
+              >
                 {item}
               </a>
             ))}
@@ -225,7 +247,17 @@ export default function Home() {
           <div className="mobile-menu border-t border-white/10 bg-[#08090c]/96 px-4 py-5 shadow-2xl lg:hidden">
             <div className="mx-auto grid max-w-7xl gap-3">
               {nav.map((item) => (
-                <a key={item} href={`#${item.toLowerCase()}`} onClick={() => setOpen(false)} className="rounded-xl border border-white/10 px-4 py-3 text-sm text-white">{item}</a>
+                <a
+                  key={item}
+                  href={`#${item.toLowerCase()}`}
+                  onClick={(event) => {
+                    scrollToTarget(event, `#${item.toLowerCase()}`);
+                    setOpen(false);
+                  }}
+                  className="rounded-xl border border-white/10 px-4 py-3 text-sm text-white"
+                >
+                  {item}
+                </a>
               ))}
               <PrimaryButton href={phone.href}><Phone size={17} weight="bold" />Позвонить</PrimaryButton>
             </div>
