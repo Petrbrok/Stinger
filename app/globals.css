@@ -17,7 +17,7 @@
 }
 
 html {
-  scroll-behavior: smooth;
+  scroll-behavior: auto;
 }
 
 body {
@@ -734,19 +734,11 @@ select.premium-input option {
 }
 
 .reveal {
-  opacity: 0;
-  transform: translateY(30px) scale(0.985);
-  filter: blur(8px);
-  transition:
-    opacity 760ms cubic-bezier(0.22, 1, 0.36, 1),
-    transform 760ms cubic-bezier(0.22, 1, 0.36, 1),
-    filter 760ms cubic-bezier(0.22, 1, 0.36, 1);
+  opacity: 1;
 }
 
 .reveal.is-visible {
   opacity: 1;
-  transform: translateY(0) scale(1);
-  filter: blur(0);
 }
 
 @keyframes atmosphereShift {
@@ -767,19 +759,6 @@ select.premium-input option {
 @keyframes menuDrop {
   from { opacity: 0; transform: translateY(-10px) scaleY(0.96); }
   to { opacity: 1; transform: translateY(0) scaleY(1); }
-}
-
-@keyframes serviceCardReveal {
-  from {
-    opacity: 0;
-    transform: translateY(22px) scale(0.98);
-    filter: blur(8px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-    filter: blur(0);
-  }
 }
 
 @media (max-width: 1023px) {
@@ -839,15 +818,6 @@ select.premium-input option {
   .services-grid:not(.is-expanded) .service-card:nth-child(n+6) {
     display: none;
   }
-
-  .services-grid.is-expanded .service-card:nth-child(n+6) {
-    animation: serviceCardReveal 520ms cubic-bezier(0.22, 1, 0.36, 1) both;
-  }
-
-  .services-grid.is-expanded .service-card:nth-child(6) { animation-delay: 0.02s; }
-  .services-grid.is-expanded .service-card:nth-child(7) { animation-delay: 0.08s; }
-  .services-grid.is-expanded .service-card:nth-child(8) { animation-delay: 0.14s; }
-  .services-grid.is-expanded .service-card:nth-child(9) { animation-delay: 0.2s; }
 
   .process-card {
     min-height: 0;
